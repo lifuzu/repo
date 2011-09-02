@@ -123,6 +123,9 @@ later is required to fix a server side protocol bug.
     p.add_option('-q','--quiet',
                  dest='quiet', action='store_true',
                  help='be more quiet')
+    p.add_option('-b','--branch-name',
+                 dest='branch_name', action='store', type='string',
+                 help='branch name')
     p.add_option('-j','--jobs',
                  dest='jobs', action='store', type='int',
                  help="number of projects to fetch simultaneously")
@@ -165,7 +168,7 @@ later is required to fix a server side protocol bug.
       # - We always make sure we unlock the lock if we locked it.
       try:
         try:
-          success = project.Sync_NetworkHalf(quiet=opt.quiet)
+          success = project.Sync_NetworkHalf(quiet=opt.quiet, branch=opt.branch_name)
 
           # Lock around all the rest of the code, since printing, updating a set
           # and Progress.update() are not thread safe.
@@ -202,7 +205,7 @@ later is required to fix a server side protocol bug.
     if self.jobs == 1:
       for project in projects:
         pm.update()
-        if project.Sync_NetworkHalf(quiet=opt.quiet):
+        if project.Sync_NetworkHalf(quiet=opt.quiet, branch=opt.branch_name):
           fetched.add(project.gitdir)
         else:
           print >>sys.stderr, 'error: Cannot fetch %s' % project.name

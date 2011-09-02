@@ -884,7 +884,7 @@ class Project(object):
 
 ## Sync ##
 
-  def Sync_NetworkHalf(self, quiet=False):
+  def Sync_NetworkHalf(self, quiet=False, branch=None):
     """Perform only the network IO portion of the sync process.
        Local working directory/branch state is not affected.
     """
@@ -895,7 +895,7 @@ class Project(object):
         print >>sys.stderr, 'Initializing project %s ...' % self.name
       self._InitGitDir()
 
-    self._InitRemote()
+    self._InitRemote(branch)
     if not self._RemoteFetch(initial=is_new, quiet=quiet):
       return False
 
@@ -1385,6 +1385,8 @@ class Project(object):
     if tag is not None:
       cmd.append('tag')
       cmd.append(tag)
+    else:
+      cmd.append('-n')
 
     ok = GitCommand(self,
                     cmd,
@@ -1507,7 +1509,7 @@ class Project(object):
         else:
           raise
 
-  def _InitRemote(self):
+  def _InitRemote(self, branch=None):
     if self.remote.url:
       remote = self.GetRemote(self.remote.name)
       remote.url = self.remote.url
@@ -1515,9 +1517,9 @@ class Project(object):
       remote.projectname = self.name
 
       if self.worktree:
-        remote.ResetFetch(mirror=False)
+        remote.ResetFetch(branch, mirror=False)
       else:
-        remote.ResetFetch(mirror=True)
+        remote.ResetFetch(branch, mirror=True)
       remote.Save()
 
   def _InitMRef(self):
