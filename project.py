@@ -1385,8 +1385,8 @@ class Project(object):
     if tag is not None:
       cmd.append('tag')
       cmd.append(tag)
-    else:
-      cmd.append('-n')
+    #else:
+    #  cmd.append('-n')
 
     ok = GitCommand(self,
                     cmd,
