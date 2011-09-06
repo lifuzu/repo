@@ -1,0 +1,17 @@
+This repo is forked from android.git.kernel.org/tools/repo.git, which is not stable recently, and we enhanced the function to support to fetch only a specific branch, like
+
+"
+repo init ....
+repo sync -b BRANCH_NAME
+"
+
+NOTICE: you need to change your repo script at your local image, you can find it with command "which repo", to replace this file with "", for example:
+
+build@dhabuildimage30:~$ which repo
+/home/build/bin/repo
+build@dhabuildimage30:~$ curl http://.... > /home/build/bin/repo
+build@dhabuildimage30:~$ chmod +x /home/build/bin/repo
+
+then you need to remove your old ~/.repoconfig since the new one with different gpg key signing. Don't worry, this folder can be generated automatically at next run "repo init".
+
+build@dhabuildimage30:~$ rm -fr ~/.repoconfig
