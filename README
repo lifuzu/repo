@@ -9,7 +9,7 @@ NOTICE: you need to change your repo script at your local image, you can find it
 
 build@dhabuildimage30:~$ which repo
 /home/build/bin/repo
-build@dhabuildimage30:~$ curl http://.... > /home/build/bin/repo
+build@dhabuildimage30:~$ curl https://raw.github.com/lifuzu/repo/master/repo > /home/build/bin/repo
 build@dhabuildimage30:~$ chmod +x /home/build/bin/repo
 
 then you need to remove your old ~/.repoconfig since the new one with different gpg key signing. Don't worry, this folder can be generated automatically at next run "repo init".
