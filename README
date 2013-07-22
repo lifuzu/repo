@@ -14,4 +14,4 @@ $ chmod +x /home/build/bin/repo
 
 then you need to remove your old ~/.repoconfig since the new one with different gpg key signing. Don't worry, this folder can be generated automatically at next run "repo init".
 
-build@dhabuildimage30:~$ rm -fr ~/.repoconfig
+$ rm -fr ~/.repoconfig
